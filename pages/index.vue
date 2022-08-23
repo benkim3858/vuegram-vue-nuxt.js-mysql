@@ -64,9 +64,18 @@ export default {
         return {
         };
     },
+
+    mounted() {
+        this.test_api();
+    },
+
     methods: {
         move_sign_up() {
             this.$router.push('/signUp');
+        },
+        async test_api() {
+            let res = await this.$axios.post('/user/find_all');
+            console.log(res);
         }
     },
 }

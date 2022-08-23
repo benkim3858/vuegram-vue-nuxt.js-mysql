@@ -77,7 +77,7 @@ export default {
   },
 
   server: {
-    port: 3000,
+    port: 3005,
     host: '0.0.0.0',
     timing: false,
 },
