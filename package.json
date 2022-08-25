@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
+    "dev": "nodemon --watch api --exec \"nuxt\"",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate"
@@ -17,6 +17,7 @@
     "express-session": "^1.17.3",
     "morgan": "^1.10.0",
     "mysql": "^2.18.1",
+    "nodemon": "^2.0.19",
     "nuxt": "^2.15.8",
     "sass-loader": "^10.3.1",
     "vue": "^2.6.14",

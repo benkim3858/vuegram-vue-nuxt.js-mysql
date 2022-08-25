@@ -8,8 +8,10 @@ dotenv.config();
 // const port = process.env.PORT
 
 app.get('/', (req, res) => {
-  res.send('Hello World!');
+    res.send('Hello World!');
 });
+
+app.use(express.json());
 
 app.use('/user', require('./routes/user.js'));
 

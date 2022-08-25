@@ -9,16 +9,16 @@
                         </button>
                     </div>
                     <div class="input_box">
-                        <input type="text" placeholder="휴대폰 번호 또는 이메일 주소" v-model.trim="user.user_id">
+                        <input type="text" placeholder="휴대폰 번호 또는 이메일 주소" v-model.trim="user_info.user_id">
                     </div>
                     <div class="input_box">
-                        <input type="text" placeholder="성명" v-model.trim="user.name">
+                        <input type="text" placeholder="성명" v-model.trim="user_info.name">
                     </div>
                     <div class="input_box">
-                        <input type="text" placeholder="사용자 닉네임" v-model.trim="user.nick_name">
+                        <input type="text" placeholder="사용자 닉네임" v-model.trim="user_info.nick_name">
                     </div>
                     <div class="input_box">
-                        <input type="password" placeholder="비밀번호" v-model.trim="user.user_pw">
+                        <input type="password" placeholder="비밀번호" v-model.trim="user_info.user_pw">
                     </div>
                     <div class="btn_login">
                         <button @click="sign_up">회원 가입</button>
@@ -50,7 +50,7 @@ export default {
 
     data() {
         return {
-            user: {
+            user_info: {
                 user_id: '',
                 name: '',
                 nick_name: '',
@@ -66,11 +66,11 @@ export default {
     methods: {
         async sign_up() {
             try {
-                const user_info = this.user;
-                await this.$axios.post('/sign_up', {
+                const user_info = this.user_info;
+                const res = await this.$axios.post('/user/sign_up', {
                     user_info
                 })
-
+                console.log(res);
             } catch (e) {
                 console.error(e);
             }

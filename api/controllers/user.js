@@ -14,14 +14,10 @@ export default {
         return res.send(result);
     },
 
-    sign_up() {
-        // const {user_info} = req.body
-        // try {
-        //     console.log('user controller@@@');
-        // } catch (e) {
-        //     console.error(e);
-        // }
-        console.log('user controller@@@@@');
+    async sign_up(req, res, next) {
+        // console.log(req.body);
+        const result = await User.sign_up(req.body);
+        return res.send(result);
     },
 
 }

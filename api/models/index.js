@@ -9,23 +9,8 @@ const pool = mysql.createPool({
     password : process.env.DB_PASSWORD,
 });
 
-// const get_connection = function(resolve, reject) {
-//     pool.getConnection(function(err, connection) {
-//         if(err) return reject(err);
-//         console.log("DB Connected!");
-//         return resolve(connection);
-//     })
-// }
 
-// function get_connection() {
-//     return new Promise(function(resolve, reject) {
-//         pool.getConnection(function(err, connection) {
-//             if(err) return reject(err);
-//             console.log("DB Connected!");
-//             return resolve(connection);
-//         })
-//     })
-// }
+// ===============================================================
 
 class Pool {
     constructor () {
@@ -46,11 +31,31 @@ class Pool {
         const t = this;
         return new Promise(function(resolve, reject){
             t.connection.query(sql, function(err, res) {
+                console.log(res,'index.js')
                 resolve(res);
             });
         });
     }
 }
 
+// ===============================================================
+
+// const get_connection = function(resolve, reject) {
+//     pool.getConnection(function(err, connection) {
+//         if(err) return reject(err);
+//         console.log("DB Connected!");
+//         return resolve(connection);
+//     })
+// }
+
+// function get_connection() {
+//     return new Promise(function(resolve, reject) {
+//         pool.getConnection(function(err, connection) {
+//             if(err) return reject(err);
+//             console.log("DB Connected!");
+//             return resolve(connection);
+//         })
+//     })
+// }
 
 module.exports = Pool;
