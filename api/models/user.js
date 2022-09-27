@@ -1,52 +1,70 @@
-const mysql = require('./index.js');
+const path = require('path');
 
-// const User = function (users) {
-//     this.user_id = users.user_id;
-//     this.user_pw = users.user_pw;
-//     this.user_name = users.name;
-//     this.user_nick_name = users.nick_name;
-// };
-
-// const User = {};
-// User.find_all = function (result) {
-//     mysql(function(connection) {
-//         connection.query("SELECT * FROM users", function(err, res) {
-//             result(res);
-//         })
-//     })
-// }
-
-// const User = {};
-// User.find_all = function (result) {
-//     const connection = await mysql();
-//     connection.query("SELECT * FROM users", function(err, res) {
-//         result(res);
-//     })
-// }
-
-const User = {};
-
-User.find_all = async function() {
-    return new Promise(async function(resolve, reject) {
-        const pool = new mysql();
-        await pool.getConnection();
-        let result = await pool.query("SELECT * FROM users");
-        return resolve(result);
-    })
-}
-
-User.sign_up = async function(req, res, next) {
-    // console.log(req, res);
-    console.log(req.user_info);
-    const r = req.user_info;
-    return new Promise(async function(resolve, reject) {
-        const pool = new mysql();
-        await pool.getConnection();
-        console.log(r.user_id,'안에서 참조가 안됨???');
-        console.log(`INSERT INTO users (user_id, user_pw, user_name, nick_name, solt_key) VALUES ('${r.user_id}', '${r.user_pw}', '${r.name}', '${r.nick_name}', ${null})`);
-        let result = await pool.query(`INSERT INTO users (user_id, user_pw, user_name, nick_name) VALUES ('${r.user_id}', '${r.user_pw}', '${r.name}', '${r.nick_name}')`);
-        return resolve(result);
-    })
-}
-
-module.exports = User;
+/*
+ * 사용자
+ */
+module.exports = (sequelize, DataTypes) => {
+  const table_name = path.parse(__filename).name;
+  const table = sequelize.define(table_name,
+    {
+      id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+        allowNull: false,
+      },
+      login_id: {
+        type: DataTypes.STRING(50),
+        allowNull: false,
+        comment: '로그인 아이디'
+      },
+      password: {
+        type: DataTypes.STRING(255),
+        allowNull: false,
+        comment: '비밀번호'
+      },
+      password_salt: {
+        type: DataTypes.STRING(255),
+        allowNull: false,
+        comment: '비밀번호 Salt'
+      },
+      name: {
+        type: DataTypes.STRING(20),
+        allowNull: false,
+        comment: '이름'
+      },
+      phone: {
+        type: DataTypes.STRING(20),
+        allowNull: true,
+        comment: '사업장 번호'
+      },
+      email: {
+        type: DataTypes.STRING(30),
+        allowNull: false,
+        comment: '이메일'
+      },
+    },
+    {
+      paranoid: true,
+      freezeTableName: true,
+      tableName: table_name,
+      underscored: true,
+      indexes: [
+        {
+          unique: true,
+          fields: ['login_id']
+        },
+      ]
+    },
+  );
+  // table.associate = function (models) {
+  //   table.hasMany(models.qna, {
+  //     foreignKey: {
+  //       allowNull: false,
+  //       name: 'user_id'
+  //     },
+  //     onDelete: 'CASCADE'
+  //   });
+  // };
+  return table;
+};

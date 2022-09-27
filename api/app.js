@@ -1,23 +1,23 @@
-const express = require('express');
-const session = require('express-session');
+const cookie_parser = require('cookie-parser');
+const create_error = require('http-errors');
 const dotenv = require('dotenv');
+const express = require('express');
 const path = require('path');
+const db = require('../api/models/index')
 
 const app = express();
 dotenv.config();
 // const port = process.env.PORT
 
-app.get('/', (req, res) => {
-    res.send('Hello World!');
-});
-
 app.use(express.json());
 
+// router
 app.use('/user', require('./routes/user.js'));
 
-// app.listen(port, () => {
-//   console.log(`Example app listening on port ${port}`)
-// })
+db.sequelize.sync({
+  alter: process.env.SEQUELIZE_ROLE === 'master',
+  // force: process.env.SEQUELIZE_ROLE === 'master',
+});
 
 module.exports = {
     path:'/api',

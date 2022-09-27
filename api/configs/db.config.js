@@ -1,10 +1,28 @@
 module.exports = {
-    connectionLimit : 10,
-    database : process.env.DB_NAME,
-    host     : process.env.DB_HOST,
-    user     : process.env.DB_USER,
-    password : process.env.DB_PASSWORD,
-}
+  database: process.env.DB_NAME,
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  dialect: 'mysql',
+  dialectOptions: {
+    charset: 'utf8mb4',
+    dateStrings: true,
+    typeCast: true,
+    supportBigNumbers: true
+  },
+  define: {
+    timestamp: true,
+    underscored: true,
+    underscoredAll: true,
+    createdAt: 'created_at',
+    updatedAt: 'updated_at',
+    deletedAt: 'deleted_at'
+  },
+  pool: {
+    max: 200,
+    min: 0,
+  },
+};
 
 
 // module.exports = {
