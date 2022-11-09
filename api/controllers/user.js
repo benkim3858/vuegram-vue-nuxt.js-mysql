@@ -8,20 +8,18 @@ const {
 module.exports = {
   async sign_up(req, res, next) {
     try {
-      const user_temp = req.body;
+      const user_temp = req.body.user_info;
 
       // 임시 salt
       user_temp.password_salt = 'aaa'
       const [find_user, created] = await User.findOrCreate({
-        where: {
-          login_id: user_temp.login_id,
-          defaults: user_temp,
-        }
+        where: { login_id: user_temp.login_id},
+        defaults: user_temp,
       });
 
-      if(!created) return res.fail(500);
+      if(!created) return res.status(500);
 
-      return res.success(200);
+      return res.status(200).send('good');
     } catch (e) {
       console.error(e);
       return next(e);

@@ -5,11 +5,11 @@
                 <div class="login">
                     <div>
                         <button @click="$router.push('/')">
-                            <img class="login_img" src="~/assets/img/vuegram_logo.png" >
+                            <img class="login_img" src="~/assets/img/vuegram_logo.png" alt="">
                         </button>
                     </div>
                     <div class="input_box">
-                        <input type="text" placeholder="휴대폰 번호 또는 이메일 주소" v-model.trim="user_info.user_id">
+                        <input type="text" placeholder="휴대폰 번호 또는 이메일 주소" v-model.trim="user_info.login_id">
                     </div>
                     <div class="input_box">
                         <input type="text" placeholder="성명" v-model.trim="user_info.name">
@@ -54,7 +54,7 @@ export default {
                 login_id: '',
                 name: '',
                 nick_name: '',
-                user_pw: '',
+                password: '',
             }
         };
     },

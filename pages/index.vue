@@ -71,10 +71,9 @@ export default {
 
     methods: {
         move_sign_up() {
-            this.$router.push('/signUp');
+            this.$router.push('/join');
         },
         async test_api() {
-          console.log('@@@@@@@@@@@@@@@@@@@@@@@@')
             let res = await this.$axios.get('/user/test');
 
             console.log(res);
