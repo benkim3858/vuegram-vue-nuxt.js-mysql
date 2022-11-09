@@ -1,30 +1,40 @@
-const User = require("../models/user.js");
-// const mysql = require('./index.js');
-// const Mysql = require('mysql');
+const {
+  sequelize,
+  user: User,
+} = require('../models');
+// const { encrypt, decrypt } = require('../utils/encrypt');
+// const jwt = require('../utils/jwt');
 
-export default {
-    // find_all(req, res, next) {
-    //     User.find_all(function(result) {
-    //         return res.send(result);
-    //     })
-    // },
+module.exports = {
+  async sign_up(req, res, next) {
+    try {
+      const user_temp = req.body;
 
-    async find_all(req, res, next) {
-        const result = await User.find_all();
-        return res.send(result);
-    },
+      // 임시 salt
+      user_temp.password_salt = 'aaa'
+      const [find_user, created] = await User.findOrCreate({
+        where: {
+          login_id: user_temp.login_id,
+          defaults: user_temp,
+        }
+      });
 
-    async sign_up(req, res, next) {
-        // console.log(req.body);
-        const result = await User.sign_up(req.body);
-        return res.send(result);
-    },
+      if(!created) return res.fail(500);
 
-    
-    
+      return res.success(200);
+    } catch (e) {
+      console.error(e);
+      return next(e);
+    }
+  },
 
+  async test(req, res, next) {
+    try {
 
-
-
-
+      return res.status(200).send('@@@@@@@');
+    } catch (e) {
+      console.error();
+      return next(e);
+    }
+  }
 }

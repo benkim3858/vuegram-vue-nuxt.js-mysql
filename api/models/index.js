@@ -2,12 +2,12 @@ const fs = require('fs');
 const path = require('path');
 const { Sequelize } = require('sequelize');
 
-const config = require('../configs/db.config');
+const config = require('../config/db.config');
 const db = {};
 
 const sequelize = new Sequelize(
   config.database,
-  config.user,
+  config.username,
   config.password,
   config,
 );

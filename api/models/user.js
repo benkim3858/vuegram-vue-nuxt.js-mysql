@@ -33,19 +33,24 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         comment: '이름'
       },
+      nick_name: {
+        type: DataTypes.STRING(30),
+        allowNull: false,
+        comment: '닉이름'
+      },
       phone: {
         type: DataTypes.STRING(20),
         allowNull: true,
-        comment: '사업장 번호'
+        comment: '휴대폰 번호'
       },
       email: {
-        type: DataTypes.STRING(30),
-        allowNull: false,
+        type: DataTypes.STRING(50),
+        allowNull: true,
         comment: '이메일'
       },
     },
     {
-      paranoid: true,
+      // paranoid: true,
       freezeTableName: true,
       tableName: table_name,
       underscored: true,
@@ -57,14 +62,5 @@ module.exports = (sequelize, DataTypes) => {
       ]
     },
   );
-  // table.associate = function (models) {
-  //   table.hasMany(models.qna, {
-  //     foreignKey: {
-  //       allowNull: false,
-  //       name: 'user_id'
-  //     },
-  //     onDelete: 'CASCADE'
-  //   });
-  // };
   return table;
 };

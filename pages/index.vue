@@ -38,7 +38,7 @@
                         <hr>
                     </div>
                     <div class="sign_up">
-                        계정이 없으신 가요? 
+                        계정이 없으신 가요?
                         <button class="btn_sign_up" @click="move_sign_up">가입하기</button>
                     </div>
                     <div class="app_down">
@@ -74,7 +74,9 @@ export default {
             this.$router.push('/signUp');
         },
         async test_api() {
-            let res = await this.$axios.post('/user/find_all');
+          console.log('@@@@@@@@@@@@@@@@@@@@@@@@')
+            let res = await this.$axios.get('/user/test');
+
             console.log(res);
         }
     },
@@ -87,7 +89,7 @@ export default {
         width: 100%;
         display: flex;
         margin: 0 0 60px 0;
-        
+
     }
     .body {
         width: 100%;
@@ -131,7 +133,7 @@ export default {
                 background-color: #ffffff;
                 border: 1px solid #e4e4e4;
                 max-width: 600px;
-                
+
                 height: 620px;
                 /* margin-left:120px; */
                 padding: 12px;

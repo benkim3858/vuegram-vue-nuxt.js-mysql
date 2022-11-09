@@ -9,13 +9,13 @@ export default {
       lang: 'en'
     },
     meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
-      { name: 'format-detection', content: 'telephone=no' }
+      {charset: 'utf-8'},
+      {name: 'viewport', content: 'width=device-width, initial-scale=1'},
+      {hid: 'description', name: 'description', content: ''},
+      {name: 'format-detection', content: 'telephone=no'}
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}
     ]
   },
 
@@ -29,8 +29,7 @@ export default {
   },
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [
-  ],
+  plugins: [],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -40,13 +39,8 @@ export default {
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
     '@nuxtjs/style-resources',
+    '@nuxt/postcss8'
   ],
-
-  // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {
-    // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: '/api'
-  },
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
@@ -73,16 +67,29 @@ export default {
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {
+  build: {},
+
+  // Axios module configuration: https://go.nuxtjs.dev/config-axios
+  axios: {
+    // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
+    baseURL: '/api',
+    // proxy: true
+  },
+
+  proxy: {
+    '/api' : { target: process.env.AXIOS_BASE_URL, pathRewrite: { '^/api/': '/' } },
+    // '/download' : { target: process.env.CLOUD_FRONT, pathRewrite: { '^/download/': '/' } },
+    // '/image' : { target: process.env.CLOUD_FRONT, pathRewrite: { '^/image/': '/' } },
+    // '/thumb' : { target: process.env.CLOUD_FRONT, pathRewrite: { '^/thumb/': '/thumbnails/' } },
   },
 
   server: {
     port: 3005,
     host: '0.0.0.0',
-    timing: false,
-},
+    timing: false
+  },
 
-  serverMiddleware : [
-    '~/api/app.js'
-  ]
+  serverMiddleware: [
+    '~/api/app.js',
+  ],
 }

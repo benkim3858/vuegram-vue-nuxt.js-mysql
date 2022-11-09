@@ -1,9 +1,11 @@
 module.exports = {
+  username: process.env.DB_USER,
+  password: process.env.DB_PASS,
   database: process.env.DB_NAME,
   host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
+  port: process.env.DB_PORT,
   dialect: 'mysql',
+  timezone: '+09:00',
   dialectOptions: {
     charset: 'utf8mb4',
     dateStrings: true,
@@ -22,6 +24,11 @@ module.exports = {
     max: 200,
     min: 0,
   },
+  // logging: process.env.NODE_ENV === 'development' ? function (str){
+  //   if(!/ALTER TABLE|CREATE TABLE|INFORMATION_SCHEMA|SHOW/.test(str)) {
+  //     console.info(str);
+  //   }
+  // } : false,
 };
 
 

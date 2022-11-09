@@ -28,7 +28,7 @@
                     </div>
                     <hr>
                 </div>
-                
+
                 <div class="app_down">
                     앱을 다운로드하세요.
                     <div class="app_img_box">
@@ -51,7 +51,7 @@ export default {
     data() {
         return {
             user_info: {
-                user_id: '',
+                login_id: '',
                 name: '',
                 nick_name: '',
                 user_pw: '',
@@ -60,7 +60,7 @@ export default {
     },
 
     mounted() {
-        
+
     },
 
     methods: {
