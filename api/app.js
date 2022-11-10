@@ -13,6 +13,8 @@ dotenv.config({path: path.resolve('.env')});
 /**
  * Import custom modules
  */
+require('./config/global.config');
+const morgan = require('./config/morgan.config');
 const db = require('./models/index');
 
 /**
