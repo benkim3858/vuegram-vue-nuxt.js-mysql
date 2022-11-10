@@ -8,7 +8,7 @@ const path = require('path');
 /**
  * Import env
  */
-dotenv.config();
+dotenv.config({path: path.resolve('.env')});
 
 /**
  * Import custom modules
