@@ -11,6 +11,7 @@ module.exports = {
       const user_temp = req.body.user_info;
 
       // 임시 salt
+      // crypto
       user_temp.password_salt = 'aaa'
       const [find_user, created] = await User.findOrCreate({
         where: { login_id: user_temp.login_id},
